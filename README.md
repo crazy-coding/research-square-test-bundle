@@ -1,5 +1,8 @@
 # Research Square Test Bundle
 
+## Running
+Run frontend and backend at once with ``yarn serve`` after installing with ``yarn``
+
 ## Tech Stacks
 
 - React
