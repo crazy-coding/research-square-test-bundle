@@ -18,25 +18,25 @@ Host: Frontend (http://localhost:3000), Backend (http://localhost:3001)
 
 ### Get articles for all
 ```
-curl 'http://localhost/api/search' \
+curl 'http://localhost:3001/api/search' \
   --request GET \
   --header 'Content-Type: application/json' \
 ```
 ### Get articles for user, admin
 ```
-curl 'http://localhost/api/articles' \
+curl 'http://localhost:3001/api/articles' \
   --request GET \
   --header 'Content-Type: application/json' \
 ```
 ### Get article for user
 ```
-curl 'http://localhost/api/articles/1' \
+curl 'http://localhost:3001/api/articles/1' \
   --request GET \
   --header 'Content-Type: application/json' \
 ```
 ### Create article for user
 ```
-curl 'http://localhost/api/articles' \
+curl 'http://localhost:3001/api/articles' \
   --request POST \
   --header 'Content-Type: application/json' \
   --location \
@@ -49,7 +49,7 @@ curl 'http://localhost/api/articles' \
 ```
 ### Update article for user
 ```
-curl 'http://localhost/api/articles/1' \
+curl 'http://localhost:3001/api/articles/1' \
   --request PATCH \
   --header 'Content-Type: application/json' \
   --location \
@@ -62,13 +62,13 @@ curl 'http://localhost/api/articles/1' \
 ```
 ### Delete article for user
 ```
-curl 'http://localhost/api/articles/1' \
+curl 'http://localhost:3001/api/articles/1' \
   --request DELTE \
   --header 'Content-Type: application/json' \
 ```
 ### Agree article for admin
 ```
-curl 'http://localhost/api/agree/1' \
+curl 'http://localhost:3001/api/agree/1' \
   --request PATCH \
   --header 'Content-Type: application/json' \
   --location \
