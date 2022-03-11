@@ -2,6 +2,9 @@ var express = require("express")
 var app = express()
 var db = require("./database.js")
 var md5 = require("md5")
+var cors = require("cors")
+
+app.use(cors());
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -12,6 +15,21 @@ var HTTP_PORT = 3001
 // Start server
 app.listen(HTTP_PORT, () => {
     console.log("Server running on port http://localhost:%PORT%".replace("%PORT%",HTTP_PORT))
+});
+
+app.get("/api/search", (req, res, next) => {
+    var sql = "select * from article where active = 1"
+    var params = []
+    db.all(sql, params, (err, rows) => {
+        if (err) {
+          res.status(400).json({"error":err.message});
+          return;
+        }
+        res.json({
+            "message":"success",
+            "data":rows
+        })
+      });
 });
 
 app.get("/api/articles", (req, res, next) => {
@@ -54,6 +72,10 @@ app.post("/api/articles/", (req, res, next) => {
     if (!req.body.authors){
         errors.push("No authors specified");
     }
+    if (errors.length > 0) {
+        res.status(400).json(errors);
+        return;
+    }
     var data = {
         title: req.body.title,
         authors: req.body.authors,
@@ -78,6 +100,17 @@ app.post("/api/articles/", (req, res, next) => {
 
 
 app.patch("/api/articles/:id", (req, res, next) => {
+    var errors=[]
+    if (!req.body.title){
+        errors.push("No title specified");
+    }
+    if (!req.body.authors){
+        errors.push("No authors specified");
+    }
+    if (errors.length > 0) {
+        res.status(400).json(errors);
+        return;
+    }
     var data = {
         title: req.body.title,
         authors: req.body.authors,
@@ -123,7 +156,7 @@ app.delete("/api/articles/:id", (req, res, next) => {
 
 app.patch("/api/agree/:id", (req, res, next) => {
     var data = {
-        active: true,
+        active: req.body.active,
     }
     db.run(
         `UPDATE article set 
