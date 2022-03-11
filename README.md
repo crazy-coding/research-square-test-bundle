@@ -3,6 +3,8 @@
 ## Running
 Run frontend and backend at once with ``yarn serve`` after installing with ``yarn``
 
+Host: Frontend (http://localhost:3000), Backend (http://localhost:3001)
+
 ## Tech Stacks
 
 - React
